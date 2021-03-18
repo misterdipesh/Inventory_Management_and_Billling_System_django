@@ -6,6 +6,7 @@ class Product(models.Model):
     product_price=models.IntegerField(verbose_name='Price')
     product_mfd=models.DateField(verbose_name='Manufacturing Date')
     product_exp=models.DateField(verbose_name='Expiry Date')
+    product_barcode=models.IntegerField(verbose_name="Barcode Number",unique=True,null=True)
 
     def __str__(self):
         return self.product_name
