@@ -7,7 +7,7 @@ class Bill(models.Model):
     bill_amount=models.IntegerField(verbose_name='Amount')
     bill_date=models.DateTimeField(auto_now_add=True,verbose_name='Date')
     bill_product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name='Product')
-    bil_quantity=models.IntegerField(verbose_name='Quantity')
+    bill_quantity=models.IntegerField(verbose_name='Quantity')
     slug=models.SlugField(null=True,unique=True)
     def __str__(self):
         return self.bill_customer
