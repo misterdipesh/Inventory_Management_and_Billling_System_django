@@ -9,24 +9,24 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Heading</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Active</th>
-                                    <th>Category</th>
-                                    <th>Author</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price Rate</th>
+                                    <th>MFD</th>
+                                    <th>EXP</th>
+                                    <th>barcode</th>
                                     <th rowspan="2"> Controls</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {% for item in items %}
                                 <tr>
-                                    <td>{{item}}</td>
-                                    <td>{{item}}</td>
-                                    <td>{{item}}</td>
-                                    <td>{{item}}</td>
-                                    <td>{{item}}</td>
-                                    <td></td>
+                                    <td>{{product.product_name}}</td>
+                                    <td>{{product.product_quantity}}</td>
+                                    <td>{{product.product_price}}</td>
+                                    <td>{{product.product_mfd}}</td>
+                                    <td>{{product.product_exp}}</td>
+                                    <td>{{product.product_barcode}}</td>
                                     <td><a href= "{% url 'delete_product' slug=item.slug %}" class="btn btn-danger">Delete</a>
                                         <a href="{% url 'edit_product' slug=item.slug %}" class="btn btn-info">Edit</a></td>
                                 </tr>
