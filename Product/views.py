@@ -20,12 +20,12 @@ def ShowProduct(request):
     }
     return render(request,template,context)
 def EditProduct(request,slug):
+    product = Product.objects.get(slug=slug)
     if request.method=="POST":
-        form=ProductForm(request.POST)
+        form=ProductForm(request.POST,instance=product)
         if form.is_valid():
             form.save()
             return redirect('details_product')
-    product=Product.objects.get(slug=slug)
     form=ProductForm(instance=product)
     template='edit_products.html'
     context={

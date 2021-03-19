@@ -19,7 +19,7 @@ def CustomerDetails(request):
 def CustomerEdit(request,slug):
     customer = Customer.objects.get(slug=slug)
     if request.method=="POST":
-        form=CustomerRegistrationForm(request.POST)
+        form=CustomerRegistrationForm(request.POST,instance=customer)
         if form.is_valid():
             form.save()
             return redirect('details_customer')

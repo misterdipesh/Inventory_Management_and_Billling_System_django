@@ -17,12 +17,12 @@ def BillDetails(request):
     template='bill_details.html'
     return render(request,template,context)
 def BillEdit(request,slug):
+    bill = Bill.objects.get(slug=slug)
     if request.method=="POST":
-        form=BillForm(request.POST)
+        form=BillForm(request.POST,instance=bill)
         if form.is_valid():
             form.save()
             return redirect('bill_details')
-    bill=Bill.objects.get(slug=slug)
     form=BillForm(instance=bill)
     context={'form':form}
     template='bill_edit.html'
