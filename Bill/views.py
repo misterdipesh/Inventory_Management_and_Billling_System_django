@@ -12,8 +12,8 @@ def NewBill(request):
     context={'form':form}
     return render(request,template,context)
 def BillDetails(request):
-    bill=Bill.objects.all()
-    context={'bill':bill}
+    bills=Bill.objects.all()
+    context={'bills':bills}
     template='bill_details.html'
     return render(request,template,context)
 def BillEdit(request,slug):
