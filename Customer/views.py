@@ -12,9 +12,9 @@ def CustomerRegister(request):
     template='customer_register.html'
     return render(request,template,context)
 def CustomerDetails(request):
-    customer=Customer.objects.all()
+    customers=Customer.objects.all()
     template='details_customer.html'
-    context={'customer':customer}
+    context={'customers':customers}
     return render(request,template,context)
 def CustomerEdit(request,slug):
     customer = Customer.objects.get(slug=slug)
