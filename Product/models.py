@@ -8,10 +8,10 @@ class Product(models.Model):
     product_mfd=models.DateField(verbose_name='Manufacturing Date')
     product_exp=models.DateField(verbose_name='Expiry Date')
     product_barcode=models.IntegerField(verbose_name="Barcode Number",unique=True,null=True)
-    slug=models.SlugField(null=True,unique=True)
+    slug=models.SlugField(null=True,unique=True,blank=True)
     def save(self,*args,**kwargs):
         if not self.slug:
-            self.slug='-'.join(slugify(self.product_name),slugify(self.product_brand),slugify(self.product_price))
+            self.slug=slugify(self.product_name)
         return super().save(*args,**kwargs)
 
     def __str__(self):
