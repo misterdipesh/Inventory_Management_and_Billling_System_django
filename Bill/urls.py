@@ -7,5 +7,5 @@ urlpatterns = [
     path('edit/<slug:slug>/', BillEdit, name='edit_bill'),
     path('delete/<slug:slug>/', BillDelete, name='delete_bill'),
     path('scan/',SellingItems,name='scanner'),
-    path('billprint/',Invoice,name='print_bill')
+    path('billprint/<int:id>/',Invoice,name='print_bill')
 ]

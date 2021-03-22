@@ -4,44 +4,52 @@ from .models import Bill,TemporatyStorage,SoldItem
 from Product.models import Product
 from Customer.models import Customer
 def SellingItems(request):
+    bill = Bill.objects.create(bill_amount=0)
+    context = {'message': '',
+               'bill': bill}
+
     if request.method=="POST":
         barcode=int(request.POST.get('barcode'))
         quantity = int(request.POST.get('quantity'))
-        try:
-            product=Product.objects.get(product_barcode=barcode)
-            print(product)
-            items=TemporatyStorage.objects.create(items=product,quantity=quantity)
-            items.save()
-            return render(request,'barcodeaddproduct.html',{'message':'Item added'})
-        except:
-            return HttpResponse("NOT FOUND")
-    else:
-        return render(request,'barcodeaddproduct.html',{'message':''})
 
-def Invoice(request):
+        product=Product.objects.get(product_barcode=barcode)
+        print(product.product_name)
+        items=SoldItem.objects.create(product=product,quantity=quantity,bill_no=bill)
+        items.save()
+
+
+        return render(request,'barcodeaddproduct.html',{'message': 'added','bill':bill})
+
+    else:
+        return render(request,'barcodeaddproduct.html',context)
+
+def Invoice(request,id):
     if request.method=='POST':
         customer_email=request.POST.get('customer')
         customer=Customer.objects.get(customer_email=customer_email)
-        items=TemporatyStorage.objects.all()
+        bill=Bill.objects.get(id=id)
+        bill.customer=customer
+        print(bill.customer)
         amount=0
-        for item in items:
-            product=Product.objects.get(id=item.items.id)
-            amount+=item.quantity*product.product_price
-            print(amount)
-        bill=Bill.objects.create(bill_amount=amount)
-        bill.save()
-        for item in items:
-            product = Product.objects.get(id=item.items.id)
-            sellitem=SoldItem.objects.create(customer=customer,product=product,bill_quantity=item.quantity,bill_no=bill)
-            sellitem.save()
+        product=SoldItem.objects.all().filter(bill_no=bill.id)
+        rate=[]
 
+        for item in product:
+            product_item=Product.objects.get(id=item.product.id)
+            rate.append(product_item)
+            amount=product_item.product_price*item.quantity
+        bill.bill_amount=amount
+        bill.save()
         context={'amount':amount,
-                 'items':items,
                  'customer':customer,
+                 'items':rate,
                  'bill':bill.id
                  }
-        items.delete()
-        return render(request,"invoice_print.html",context)
+        return render(request, "invoice_print.html", context)
+
+
+
+
     else:
         return render(request,'select_customer.html')
 
