@@ -19,7 +19,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {% for item in items %}
+                            {% for product in products %}
                                 <tr>
                                     <td>{{product.product_name}}</td>
                                     <td>{{product.product_quantity}}</td>
@@ -27,8 +27,8 @@
                                     <td>{{product.product_mfd}}</td>
                                     <td>{{product.product_exp}}</td>
                                     <td>{{product.product_barcode}}</td>
-                                    <td><a href= "{% url 'delete_product' slug=item.slug %}" class="btn btn-danger">Delete</a>
-                                        <a href="{% url 'edit_product' slug=item.slug %}" class="btn btn-info">Edit</a></td>
+                                    <td><a href= "{% url 'delete_product' slug=product.slug %}" class="btn btn-danger">Delete</a>
+                                        <a href="{% url 'edit_product' slug=product.slug %}" class="btn btn-info">Edit</a></td>
                                 </tr>
                             {%endfor%}
                             </tbody>

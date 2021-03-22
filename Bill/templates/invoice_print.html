@@ -3,9 +3,12 @@
 <html lang="en">
 
 <head>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
  <head>
 
 <body>
+<a href="javascript:window.print()" class ="btn btn-primary">Print bill</a>
 
 <section>
           <div style="width:100%;">
@@ -21,7 +24,7 @@
 
         <tr >
             <td style="font-size: 10px ; padding:10px">1</td>
-            <td style="font-size: 10px ; padding:10px">01/06/2020 12:49pm</td>
+            <td style="font-size: 10px ; padding:10px">{{date}}</td>
         </tr>
     </table>
   </div>
@@ -52,7 +55,7 @@
 
     <tr>
         <th style="width:5%; font-size: 12px; background-color:rgba(0, 60, 255, 0.158);">Phone no:</th>
-        <th>{{customer.customer_address}}</th>
+        <th>{{customer.customer_number}}</th>
     </tr>
 
     <tr>
@@ -85,9 +88,9 @@
       <tfoot>
           <tr style=" background-color:rgba(0, 60, 255, 0.158);">
             <td>Tax</td>
-            <td>10%</td>
+            <td>0%</td>
             <td>Discount</td>
-            <td>5%</td>
+            <td>0%</td>
             <td colspan="2">Total Amount</td>
             <td colspan=2>{{amount}}</td>
           </tr>

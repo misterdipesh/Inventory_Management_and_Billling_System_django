@@ -3,6 +3,7 @@ from .forms import BillForm
 from .models import Bill,SoldItem
 from Product.models import Product
 from Customer.models import Customer
+from datetime import datetime
 def SellingItems(request):
     bill = Bill.objects.create(bill_amount=0)
     context = {'message': '',
@@ -46,6 +47,8 @@ def Invoice(request,id):
                  'customer':customer,
                  'items':product,
                  'bill':bill.id,
+
+                 'date':datetime.now,
                  }
         return render(request, "invoice_print.html", context)
     else:

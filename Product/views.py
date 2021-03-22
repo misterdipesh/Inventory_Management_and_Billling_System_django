@@ -16,7 +16,7 @@ def ShowProduct(request):
     product=Product.objects.all()
     template='details_product.html'
     context={
-        'product':product
+        'products':product
     }
     return render(request,template,context)
 def EditProduct(request,slug):
