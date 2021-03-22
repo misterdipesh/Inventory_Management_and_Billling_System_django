@@ -13,4 +13,5 @@ class Bill(models.Model):
 class SoldItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name='Product')
     quantity = models.IntegerField(verbose_name='Quantity')
+    individual_price=models.FloatField(verbose_name='Amount')
     bill_no=models.ForeignKey(Bill,on_delete=models.CASCADE,verbose_name='Bill NO.')

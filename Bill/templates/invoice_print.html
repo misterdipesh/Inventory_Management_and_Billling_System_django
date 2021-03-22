@@ -73,10 +73,11 @@
       <tbody>
     {% for item in items%}
     <tr><td>1</td>
-        <td>{{item.product_name}}</td>
-    <td>{{quantity.quantity}}</td>
-    <td>{{item.product_price</td>
-    <td></td></tr>
+        <td>{{item.product}}</td>
+        <td>{{item.product.product_price}}</td>
+    <td>{{item.quantity}}</td>
+
+    <td>{{item.individual_price}} </td></tr>
 
       {%endfor%}
       </tbody>

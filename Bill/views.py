@@ -13,8 +13,11 @@ def SellingItems(request):
         quantity = int(request.POST.get('quantity'))
 
         product=Product.objects.get(product_barcode=barcode)
-        print(product.product_name)
-        items=SoldItem.objects.create(product=product,quantity=quantity,bill_no=bill)
+        product.product_quantity-=quantity
+        product.save()
+        amount=float(product.product_price*quantity)
+        items=SoldItem.objects.create(product=product,quantity=quantity,bill_no=bill,individual_price=amount)
+
         items.save()
 
 
@@ -32,18 +35,17 @@ def Invoice(request,id):
         print(bill.customer)
         amount=0
         product=SoldItem.objects.all().filter(bill_no=bill.id)
-        rate=[]
+
 
         for item in product:
             product_item=Product.objects.get(id=item.product.id)
-            rate.append(product_item)
             amount=product_item.product_price*item.quantity
         bill.bill_amount=amount
         bill.save()
         context={'amount':amount,
                  'customer':customer,
-                 'items':rate,
-                 'bill':bill.id
+                 'items':product,
+                 'bill':bill.id,
                  }
         return render(request, "invoice_print.html", context)
     else:
