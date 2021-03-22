@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from .forms import BillForm
-from .models import Bill,TemporatyStorage,SoldItem
+from .models import Bill,SoldItem
 from Product.models import Product
 from Customer.models import Customer
 def SellingItems(request):
@@ -46,10 +46,6 @@ def Invoice(request,id):
                  'bill':bill.id
                  }
         return render(request, "invoice_print.html", context)
-
-
-
-
     else:
         return render(request,'select_customer.html')
 

@@ -14,7 +14,3 @@ class SoldItem(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,verbose_name='Product')
     quantity = models.IntegerField(verbose_name='Quantity')
     bill_no=models.ForeignKey(Bill,on_delete=models.CASCADE,verbose_name='Bill NO.')
-class TemporatyStorage(models.Model):
-    items=models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity=models.IntegerField(default=1)
-
