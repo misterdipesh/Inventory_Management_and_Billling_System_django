@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% block content%}
+<div>
+    <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <th>Amount</th>
+                                    <th>Bill no</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for sale in sales %}
+                                <tr>
+                                    <td>{{sale.product.product_name}}</td>
+                                    <td>{{sale.quantity}}</td>
+                                    <td>{{sale.product.product_price}}</td>
+                                    <td>{{sale.individual_price}}</td>
+                                    <td>{{sale.bill_no}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+</div>
+{% endblock%}

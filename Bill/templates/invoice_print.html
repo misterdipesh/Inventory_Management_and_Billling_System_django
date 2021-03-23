@@ -75,7 +75,7 @@
       </tr>
       <tbody>
     {% for item in items%}
-    <tr><td>1</td>
+    <tr><td>{{ loop.index }}</td>
         <td>{{item.product}}</td>
         <td>{{item.product.product_price}}</td>
     <td>{{item.quantity}}</td>
