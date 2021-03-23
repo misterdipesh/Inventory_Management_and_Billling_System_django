@@ -53,40 +53,8 @@ def Invoice(request,id):
         return render(request, "invoice_print.html", context)
     else:
         return render(request,'select_customer.html')
-
-def NewBill(request):
-    if request.method=="POST":
-        form=BillForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('bill_details')
-    form=BillForm()
-    template='bill_add.html'
-    context={'form':form}
-    return render(request,template,context)
-def BillDetails(request):
-    bills=Bill.objects.all()
-    context={'bills':bills}
-    template='bill_details.html'
-    return render(request,template,context)
 def SalesDetails(request):
     sales=SoldItem.objects.all()
     context={'sales':sales}
     template='sales_details.html'
     return render(request,template,context)
-
-def BillEdit(request,slug):
-    bill = Bill.objects.get(slug=slug)
-    if request.method=="POST":
-        form=BillForm(request.POST,instance=bill)
-        if form.is_valid():
-            form.save()
-            return redirect('bill_details')
-    form=BillForm(instance=bill)
-    context={'form':form}
-    template='bill_edit.html'
-    return render(request,template,context)
-def BillDelete(slug):
-    bill=Bill.objects.get(slug=slug)
-    bill.delete()
-    redirect('bill_details')
