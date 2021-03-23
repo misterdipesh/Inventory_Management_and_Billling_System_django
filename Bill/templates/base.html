@@ -8,7 +8,20 @@
 </head>
 
 <body>
-<div style="width:800px">
+
+    <div style="margin:5px5px5px5px">
+        <h1 class="text-center" style="background-color: blue;">Inventory Management System</h1>
+    </div>
+        <div style="margin:auto;width:800px">
+            <a href="{% url 'scanner' %}" class="btn btn-primary btn-rounded mb-4">Sell Product</a>
+             <a href="{% url 'details_customer'  %}" class="btn btn-primary btn-rounded mb-4">Customer</a>
+            <a href="{% url 'details_product' %}" class="btn btn-primary btn-rounded mb-4">Products</a>
+             <a href="{% url 'sales_details'%}" class="btn btn-primary btn-rounded mb-4">Sales</a><br/>
+
+
+    </div>
+<div style="width:800px;height:500px;margin:auto">
+
     {%block content%}
 {%endblock%}
 
