@@ -1,19 +1,20 @@
 {%extends 'base.html'%}
 {%block content%}
-<div>
-    <div>
-        {{message}}
+<div style="margin:auto;padding:100px;border:2px solid black">
 
-    </div>
     <div class="text-center">
             <a href="{% url 'print_bill' id=bill.id %}" class="btn btn-primary btn-rounded mb-4">Proceed to Bill Print</a><br/>
         </div>
+     <div>
+        {{message}}
+
+    </div>
     <form method="post">{%csrf_token%}
         <label>Barcode</label>
-        <input type="number" required name="barcode">
+        <input type="number" required name="barcode" class="form-control">
         <br>
         <label>Quantity</label>
-        <input type="number" required name="quantity">
+        <input type="number" required name="quantity" class="form-control">
         <br>
         <input  class="btn btn-primary btn-rounded mb-4" type="submit"value="ADD">
 

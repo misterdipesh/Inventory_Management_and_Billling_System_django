@@ -1,9 +1,10 @@
 {%extends 'base.html' %}
 {%block content%}
-<div>
+<div style="margin:auto;padding:100px;border:2px solid black">
     <form method="post">{%csrf_token%}
-        <input type="text" name="customer">
-        <input type="submit" value="PRINT BILL">
+        <label class="h6">Select Customer</label>
+        <input type="text" name="customer" class="form-control">
+        <button  style="margin:12px" type="submit"  class="btn btn-primary btn-rounded mb-4" target="_blank">Print Bill</button>
 
     </form>
 </div>
