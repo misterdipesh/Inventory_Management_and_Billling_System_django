@@ -2,6 +2,7 @@
 {% block content%}
 <div style="margin:auto;padding:100px;border:2px solid black">
     <p class="h3">Login Page</p>
+    <p style="color:red">{{error}}</p>
     <form method="post">{%csrf_token%}
 
         <label>Username:</label>

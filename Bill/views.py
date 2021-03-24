@@ -4,7 +4,7 @@ from .models import Bill,SoldItem
 from Product.models import Product
 from Customer.models import Customer
 from datetime import datetime
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login/')
 def SellingItems(request):
@@ -63,13 +63,22 @@ def SalesDetails(request):
     context={'sales':sales}
     template='sales_details.html'
     return render(request,template,context)
-@login_required(login_url='/login/')
 def UserLogin(request):
-    if request.method=="POST":
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        user=authenticate(request,username=username,password=password)
-        print(user)
-        if user.is_authenticated:
-            return redirect('scanner')
-    return render(request,'login.html',{})
+    if request.user.is_authenticated:
+        return redirect('scanner')
+    else:
+        context={}
+        if request.method=="POST":
+            username=request.POST.get('username')
+            password=request.POST.get('password')
+            user=authenticate(request,username=username,password=password)
+            if user is not None:
+                login(request,user)
+
+                return redirect('scanner')
+            else:
+                context={'error':"Invalid User or Password"}
+        return render(request,'login.html',context)
+def LogoutUser(request):
+    logout(request)
+    return redirect('login')
