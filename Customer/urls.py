@@ -9,4 +9,5 @@ urlpatterns = [
     path('edit/<slug:slug>/',CustomerEdit,name='edit_customer'),
     path('delete/<slug:slug>/',CustomerDelete,name='delete_customer'),
 
+
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import  ProductForm
 from .models import Product
+@login_required(login_url='/login/')
 def RegisterProduct(request):
     if request.method=="POST":
         form=ProductForm(request.POST)
@@ -12,6 +13,7 @@ def RegisterProduct(request):
     context={'form':form}
     template='add_products.html'
     return render(request,template,context)
+@login_required(login_url='/login/')
 def ShowProduct(request):
     product=Product.objects.all()
     template='details_product.html'
@@ -19,6 +21,7 @@ def ShowProduct(request):
         'products':product
     }
     return render(request,template,context)
+@login_required(login_url='/login/')
 def EditProduct(request,slug):
     product = Product.objects.get(slug=slug)
     if request.method=="POST":
@@ -32,6 +35,7 @@ def EditProduct(request,slug):
         'form':form
     }
     return render(request,template,context)
+@login_required(login_url='/login/')
 def DeleteProduct(slug):
     product=Product.objects.get(slug=slug)
     product.delete()

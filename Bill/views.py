@@ -4,6 +4,9 @@ from .models import Bill,SoldItem
 from Product.models import Product
 from Customer.models import Customer
 from datetime import datetime
+from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+@login_required(login_url='/login/')
 def SellingItems(request):
     bill = Bill.objects.create(bill_amount=0)
     context = {'message': '',
@@ -27,6 +30,7 @@ def SellingItems(request):
     else:
         return render(request,'barcodeaddproduct.html',context)
 
+@login_required(login_url='/login/')
 def Invoice(request,id):
     if request.method=='POST':
         customer_email=request.POST.get('customer')
@@ -53,8 +57,19 @@ def Invoice(request,id):
         return render(request, "invoice_print.html", context)
     else:
         return render(request,'select_customer.html')
+@login_required(login_url='/login/')
 def SalesDetails(request):
     sales=SoldItem.objects.all()
     context={'sales':sales}
     template='sales_details.html'
     return render(request,template,context)
+@login_required(login_url='/login/')
+def UserLogin(request):
+    if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        print(user)
+        if user.is_authenticated:
+            return redirect('scanner')
+    return render(request,'login.html',{})
